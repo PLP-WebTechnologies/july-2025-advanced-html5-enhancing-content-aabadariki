@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Community Hospital Feedback & Improvement — Accessibility & Data Form</title>
+  <meta name="description" content="Submit feedback and clinical data for Community Hospital. Accessible HTML5 form for patient/staff input; semantic layout and basic on-page SEO." />
+  <meta name="keywords" content="hospital feedback, patient survey, accessibility, healthcare form, HTML5" />
+  <link rel="canonical" href="https://example.org/community-hospital-feedback" />
+
+  <!-- Open Graph (basic SEO/social preview) -->
+  <meta property="og:title" content="Community Hospital Feedback & Improvement" />
+  <meta property="og:description" content="Accessible HTML5 feedback form and trend report for Community Hospital." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.org/community-hospital-feedback" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index,follow" />
+</head>
+<body>
+  <!-- Skip link for keyboard users -->
+  <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;overflow:hidden;">
+    Skip to main content
+  </a>
+
+  <!-- Header with site title and short description -->
+  <header role="banner">
+    <h1>Community Hospital — Feedback & Reporting Portal</h1>
+    <p lang="en">Help us improve diagnosis, treatment and service delivery. Your responses are confidential and used to improve patient care.</p>
+
+    <!-- Primary navigation -->
+    <nav role="navigation" aria-label="Primary navigation">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#form">Feedback Form</a></li>
+        <li><a href="#data-summary">Data Summary</a></li>
+        <li><a href="#media-sample">Media</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <main id="main-content" role="main">
+    <!-- Intro / About section -->
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Us</h2>
+      <p>A community hospital dedicated to the fight against liver cancer. Use the form below to submit feedback or small-scale clinical counts (for internal trend analysis).</p>
+
+      <h3>Guidelines</h3>
+      <ul>
+        <li>Complete required fields marked with <strong>*</strong>.</li>
+        <li>Use accurate contact details if you want follow-up.</li>
+        <li>All inputs are validated by the browser before submission.</li> <!--(HTML5 validation)-->
+      </ul>
+    </section>
+
+    <!-- Main form section (complete form) -->
+    <article id="form" aria-labelledby="form-heading">
+      <h2 id="form-heading">Feedback & Clinical Data Form</h2>
+      <p>This form collects: contact info, feedback, and small aggregated counts for trend tracking. Fields use semantic and accessible patterns.</p>
+
+      <form action="/submit" method="post" accept-charset="utf-8" aria-describedby="form-instructions" novalidate>
+        <p id="form-instructions">Fields marked with <strong>*</strong> are required. This demo uses client-side HTML5 validation only.</p>
+
+        <!-- Identity fieldset -->
+        <fieldset>
+          <legend>Contact information</legend>
+
+          <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+          <input id="fullName" name="fullName" type="text" placeholder="Jon Snow" required autocomplete="name" minlength="2" maxlength="100" aria-required="true" />
+
+          <label for="email">Email address <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" placeholder="you@example.org" required autocomplete="email" aria-required="true" />
+
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" placeholder="+234-1234567890" autocomplete="tel"
+                 pattern="^\+?[0-9\-\s\(\)]{7,20}$" title="Enter international or local phone number" />
+
+          <label for="relationship">Your role</label>
+          <select id="relationship" name="relationship" required>
+            <option value="">Select role...</option>
+            <option value="patient">Patient</option>
+            <option value="caregiver">Caregiver</option>
+            <option value="staff">Hospital staff</option>
+            <option value="other">Other</option>
+          </select>
+        </fieldset>
+
+        <!-- Visit / Experience fieldset -->
+        <fieldset>
+          <legend>Visit & experience</legend>
+
+          <label for="visitDate">Date of last visit</label>
+          <input id="visitDate" name="visitDate" type="date" autocomplete="on" max="2025-12-31" />
+
+          <label for="dept">Department visited</label>
+          <datalist id="dept-list">
+            <option value="Emergency"></option>
+            <option value="General Medicine"></option>
+            <option value="Paediatrics"></option>
+            <option value="Oncology"></option>
+            <option value="Dentistry"></option>
+          </datalist>
+          <input id="dept" name="department" list="dept-list" placeholder="Type or choose..." autocomplete="section" />
+
+          <label for="rating">Overall experience (1-10)</label>
+          <input id="rating" name="rating" type="number" min="1" max="10" step="1" value="8" aria-describedby="rating-help" />
+          <small id="rating-help">1 = very poor, 10 = excellent.</small>
+
+          <label for="recommend">How likely to recommend to a colleague?</label>
+          <!-- Using radio group for NPS-style response -->
+          <fieldset aria-label="recommendation" role="radiogroup">
+            <legend class="visually-hidden">Recommendation</legend>
+            <label><input type="radio" name="recommend" value="Very likely" checked> Very likely</label>
+            <label><input type="radio" name="recommend" value="Neutral"> Neutral</label>
+            <label><input type="radio" name="recommend" value="I wouldn't recommend"> I wouldn't recommend</label>
+          </fieldset>
+
+          <label for="experience">Describe your experience (or write 'N/A')</label>
+          <textarea id="experience" name="experience" rows="4" placeholder="Describe any issues with diagnosis or treatment (max 1000 chars)" maxlength="1000"></textarea>
+        </fieldset>
+
+        <!-- Clinical counts fieldset (for joinpoint type counts) -->
+        <fieldset>
+          <legend>Aggregate clinical counts (optional)</legend>
+          <p>Submit small counts for trend tracking. Enter whole numbers.</p>
+
+          <label for="year">Year <span aria-hidden="true">*</span></label>
+          <input id="year" name="year" type="number" min="1900" max="2099" required value="2021" aria-required="true" />
+
+          <label for="cirr">Cirrhosis cases</label>
+          <input id="cirr" name="cirrhosis_count" type="number" min="0" step="1" placeholder="e.g., 459" autocomplete="off" />
+
+          <label for="noncirr">Non-cirrhosis cases</label>
+          <input id="noncirr" name="non_cirrhosis_count" type="number" min="0" step="1" placeholder="e.g., 177" autocomplete="off" />
+        </fieldset>
+
+        <!-- Permissions & file upload -->
+        <fieldset>
+          <legend>Permissions & attachments</legend>
+
+          <label for="consent">
+            <input id="consent" name="consent" type="checkbox" required aria-required="true" />
+            I consent to my anonymised feedback being used for quality improvement. <span aria-hidden="true">*</span>
+          </label>
+
+          <label for="attachment">Optional: Attach supporting file (PDF image)</label>
+          <input id="attachment" name="attachment" type="file" accept=".pdf,image/*" />
+        </fieldset>
+
+        <!-- Hidden / readonly fields (example of readonly use) -->
+        <fieldset>
+          <legend>System fields</legend>
+          <label for="submissionId">Submission ID</label>
+          <input id="submissionId" name="submission_id" type="text" value="AUTO-GEN-123456" readonly aria-readonly="true" />
+        </fieldset>
+
+        <!-- Form actions -->
+        <p>
+          <button type="submit">Submit feedback</button>
+          <button type="reset">Reset</button>
+        </p>
+      </form>
+    </article>
+
+    <!-- Data summary table -->
+    <section id="data-summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Sample Annual Counts (2011–2021)</h2>
+      <p>Below is a small sample table that would be used for trend analysis or joinpoint input.</p>
+
+      <figure>
+        <table role="table" summary="Annual counts for cirrhosis and non-cirrhosis from 2011 to 2021">
+          <caption>Annual counts used for trend analysis</caption>
+          <thead>
+            <tr>
+              <th scope="col">Year</th>
+              <th scope="col">Cirrhosis</th>
+              <th scope="col">Non-Cirrhosis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">2011</th><td>576</td><td>201</td></tr>
+            <tr><th scope="row">2012</th><td>559</td><td>227</td></tr>
+            <tr><th scope="row">2013</th><td>593</td><td>194</td></tr>
+            <tr><th scope="row">2014</th><td>580</td><td>251</td></tr>
+            <tr><th scope="row">2015</th><td>650</td><td>213</td></tr>
+            <tr><th scope="row">2016</th><td>515</td><td>266</td></tr>
+            <tr><th scope="row">2017</th><td>530</td><td>249</td></tr>
+            <tr><th scope="row">2018</th><td>515</td><td>223</td></tr>
+            <tr><th scope="row">2019</th><td>577</td><td>218</td></tr>
+            <tr><th scope="row">2020</th><td>437</td><td>165</td></tr>
+            <tr><th scope="row">2021</th><td>459</td><td>177</td></tr>
+          </tbody>
+        </table>
+        <figcaption>Counts are illustrative. For joinpoint analysis, export this table as CSV with columns Year, Count, Group (long format).</figcaption>
+      </figure>
+
+    </section>
+
+    <!-- Media -->
+    <section id="media" aria-labelledby="media-heading">
+      <h2 id="media-heading">Media & supporting material</h2>
+
+      <figure>
+        <img src="Hospital_Reception.jpg" alt="Reception area of Community Hospital with accessible signage" width="640" height="959" />
+        <figcaption>Reception area. Provide descriptive <code>alt</code> text for images to aid screen readers.</figcaption>
+      </figure>
+
+      <figure>
+        <video controls width="640" preload="metadata" aria-label="Short orientation video">
+          <source src="Hos_Vids.mp4" type="video/mp4" />
+          <!-- Localized captions for accessibility -->
+          <track kind="captions" srclang="en" label="English captions" src="orientation.vtt" default>
+          Your browser does not support the video element.
+        </video>
+        <figcaption>Orientation video (include captions in production).</figcaption>
+      </figure>
+    </section>
+
+    <!-- Aside for quick tips -->
+    <aside aria-labelledby="tips-heading">
+      <h2 id="tips-heading">Tips for filling this form</h2>
+      <ol>
+        <li>Provide a valid email if you want a response.</li>
+        <li>Use the numerical fields for counts (no decimals).</li>
+        <li>If you have no data or did not use the facility, enter N/A in descriptive boxes.</li>
+      </ol>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo" id="contact">
+    <h2>Contact & Legal</h2>
+    <p>Community Hospital — Feedback Portal. For technical issues with this form, contact <a href="mailto:helpdesk@communityhospital.org">helpdesk@communityhospital.org</a>.</p>
+
+    <nav aria-label="Footer links">
+      <ul>
+        <li><a href="#about">About this form</a></li>
+        <li><a href="#form">Submit feedback</a></li>
+        <li><a href="#data-summary">Data summary</a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; <time datetime="2025">2025</time> Community Hospital. All rights reserved.</p>
+  </footer>
+</body>
+</html>
